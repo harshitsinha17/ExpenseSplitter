@@ -29,6 +29,16 @@ public class ControllerService {
 		users.add(new Users("Krish"));
 	}
 	
+	/*
+	* Method to handle calculation of money owed by the other participants when one of the participant 
+	* shares the expense report (POST).
+	*
+	* @param  details
+	*		: The detailed report of the expense shared by one of the partipant to be feeded
+	*		  into the system.
+	* @return representing list of particpant details along with the money they owe.
+	*/
+	
 	@RequestMapping(value="/calculate", method = RequestMethod.POST, produces="application/json")
 	@ResponseStatus(value=HttpStatus.OK)
 	public List<Users> getOwedMoney(@RequestBody PaymentDetails details) {
@@ -78,6 +88,16 @@ public class ControllerService {
 		return users;
 	}
 	
+	/*
+	* Method to get the details of the participant from the expense report shared 
+	*
+	* @param  users
+	*		: The whole list of participants from where the details of the 
+	*		  Payer is to be extracted and returned.
+	* @param paid_by
+	*		: The name of the person who made the expense.
+	* @return User object response representing the details of the payer from local DB.
+	*/
 	
 	public Users getPayer(List<Users> users, String paid_by) {
 		
@@ -88,6 +108,17 @@ public class ControllerService {
 		}
 		return null;
 	}
+	
+	
+	/*
+	* Method to calculate the multiplier based on the type of split passed from shared report
+	* whether it is to split equally or some another ratio.
+	*
+	* @param  splitType:
+	*		    Whether the money is to be shared equally or in some other ratio.
+	*		: .
+	* @return multiplier
+	*/
 	
 	public float getMultiplier(String splitType) {
 		
