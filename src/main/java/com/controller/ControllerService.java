@@ -40,12 +40,16 @@ public class ControllerService {
 		System.out.println("The negative amount signify amount owed by others to him");
 		
 		Users payer = getPayer(users, details.getPaid_by());
-		System.out.println("The payer is "+payer.getName());
-		System.out.println("The extra amount paid by him is "+ ( details.getAmount() * multiplier  ) );
-		if(null != payer) {
-			payer.setAmount( payer.getAmount() + (-1 * details.getAmount() * multiplier ) );
+		
+		if(null == payer) {
+			
+			System.out.println("Payer could not be found in DB.");
+			return users;
 			
 		}
+		System.out.println("The payer is "+payer.getName());
+		System.out.println("The extra amount paid by him is "+ ( details.getAmount() * multiplier  ) );
+		payer.setAmount( payer.getAmount() + (-1 * details.getAmount() * multiplier ) );
 		
 		System.out.println("The payer amount has been updated to "+payer.getAmount());
 		
