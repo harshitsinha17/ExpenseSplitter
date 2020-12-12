@@ -39,8 +39,6 @@ public class ControllerService {
 		float multiplier = getMultiplier(details.getSplit_by());
 		System.out.println("The negative amount signify amount owed by others to him");
 		
-		System.out.println("************");
-		
 		Users payer = getPayer(users, details.getPaid_by());
 		System.out.println("The payer is "+payer.getName());
 		System.out.println("The extra amount paid by him is "+ ( details.getAmount() * multiplier  ) );
@@ -48,8 +46,6 @@ public class ControllerService {
 			payer.setAmount( payer.getAmount() + (-1 * details.getAmount() * multiplier ) );
 			
 		}
-		
-		System.out.println("************");
 		
 		System.out.println("The payer amount has been updated to "+payer.getAmount());
 		
@@ -61,8 +57,6 @@ public class ControllerService {
 				
 			}
 		}
-		
-		System.out.println("************");
 		
 		
 		
@@ -83,9 +77,9 @@ public class ControllerService {
 	
 	public Users getPayer(List<Users> users, String paid_by) {
 		
-		for(Users u : users ) {
-			if( (u.getName()).equalsIgnoreCase(paid_by) ) {
-				return u;
+		for(Users participant : users ) {
+			if( (participant.getName()).equalsIgnoreCase(paid_by) ) {
+				return participant;
 			}
 		}
 		return null;
